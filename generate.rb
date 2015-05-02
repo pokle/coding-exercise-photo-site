@@ -1,14 +1,4 @@
-class Image
-
-  attr_accessor :thumb, :full, :make
-
-  def initialize thumb, full, make
-    @thumb = thumb
-    @full = full
-    @make = make
-  end
-
-end
+Image = Struct.new :thumb, :full, :make
 
 module Generate
 
