@@ -6,13 +6,13 @@ module Generate
   Navigation = Struct.new :title, :path
 
   def Generate.distinct_makes(works) 
-    works[:images].collect(&:make).uniq
+    works.collect(&:make).uniq
   end
 
   def Generate.index(works)
     {
       path: "index.html",
-      images: works[:images].take(10),
+      images: works.take(10),
       navigations:  distinct_makes(works)
                     .collect{|make| Navigation.new(make, "#{make}.html")}
     }
@@ -23,7 +23,7 @@ module Generate
       .collect do |make| 
         {
           path:   "#{make}.html",
-          images: works[:images].find_all {|image| make == image.make },
+          images: works.find_all {|image| make == image.make },
           navigations: []
         }
       end
