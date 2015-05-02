@@ -1,5 +1,12 @@
 # coding-exercise-photo-site
+
 Generates a static web site about your photos, camera makes and models
+
+# Running
+
+	bundle exec ruby generate.rb works.xml output-dir
+
+That produces a static site based on works.xml into output-dir
 
 # Tests
 
