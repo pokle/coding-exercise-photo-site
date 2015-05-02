@@ -15,15 +15,15 @@ RSpec.describe Generate, ".index" do
   end
 
 
-  it "transforms works into an intermediate view representation for index pages" do
+  it "transforms images into an intermediate view representation for index pages" do
 
-    works = [
+    images = [
       sony1 = Generate::Image.new(nil, nil, "sony"),
       sony2 = Generate::Image.new(nil, nil, "sony"),
       leica1 = Generate::Image.new(nil, nil, "leica"),
     ]
 
-    expect(Generate.index(works)).to eq({
+    expect(Generate.index(images)).to eq({
       path: "index.html",
       images: [sony1, sony2, leica1],
       navigations: [
@@ -38,15 +38,15 @@ end
 
 RSpec.describe Generate, ".makes" do
 
-  it "transforms works into an intermediate representation for make pages" do
+  it "transforms images into an intermediate representation for make pages" do
 
-    works = [
+    images = [
       sony1 = Generate::Image.new(nil, nil, "sony"),
       sony2 = Generate::Image.new(nil, nil, "sony"),
       leica1 = Generate::Image.new(nil, nil, "leica"),
     ]  
 
-    expect(Generate.makes(works)).to eq(
+    expect(Generate.makes(images)).to eq(
       [
         {
           path: "sony.html",
