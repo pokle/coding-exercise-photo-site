@@ -5,7 +5,7 @@ Image = Struct.new :thumb, :full, :make, :model do
     images.collect(&:make).uniq
   end
 
-  def self.by_make(images, make)
+  def self.find_by_make(images, make)
     images.find_all {|image| make == image.make }
   end
 end
@@ -34,14 +34,16 @@ module Page
     }
   end
 
+  def self.make(images, make)
+    {
+      path:   "#{make}.html",
+      images: Image.find_by_make(images, make).take(10),
+      navigations: Image.find_by_make(images, make).uniq(&:model).collect {|image| Navigation.to_model(image)}
+    }
+  end
+
   def self.makes(images)
-    Image.distinct_makes(images).collect do |make| 
-      {
-        path:   "#{make}.html",
-        images: Image.by_make(images, make).take(10),
-        navigations: Image.by_make(images, make).uniq(&:model).collect {|image| Navigation.to_model(image)}
-      }
-    end
+    Image.distinct_makes(images).collect {|make_name| make(images, make_name)}
   end
 
 end
