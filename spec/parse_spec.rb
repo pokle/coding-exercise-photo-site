@@ -3,11 +3,11 @@ require "parse"
 RSpec.describe "parser" do
 
   it "parses an empty set of works as an empty list" do
-    expect(parse_works("<somewhere><works/></somewhere>")).to eq([])
+    expect(Parse::works("<somewhere><works/></somewhere>")).to eq([])
   end
 
-  it "parses a single work into a list containing a single image" do
-    expect(parse_works("
+  it "parses a single work into a list containing a single Parse::image" do
+    expect(Parse::works(%q{
       <works>
         <work>
           <urls>
@@ -20,11 +20,11 @@ RSpec.describe "parser" do
           </exif>
         </work>
       </works>
-    ")).to eq([Image.new('http://small', 'http://large', 'the-make', 'the-model')])
+    })).to eq([Parse::Image.new('http://small', 'http://large', 'the-make', 'the-model')])
   end
 
   it "parses a multiple works into a list" do
-    expect(parse_works("
+    expect(Parse::works(%q{
       <works>
         <work>
           <urls>
@@ -47,9 +47,9 @@ RSpec.describe "parser" do
           </exif>
         </work>
       </works>
-    ")).to eq([
-      Image.new('http://small1', 'http://large1', 'the-make-1', 'the-model-1'),
-      Image.new('http://small2', 'http://large2', 'the-make-2', 'the-model-2')
+    })).to eq([
+      Parse::Image.new('http://small1', 'http://large1', 'the-make-1', 'the-model-1'),
+      Parse::Image.new('http://small2', 'http://large2', 'the-make-2', 'the-model-2')
     ])
   end
 
