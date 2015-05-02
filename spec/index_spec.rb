@@ -41,9 +41,10 @@ RSpec.describe Generate, ".makes" do
   it "transforms images into an intermediate representation for make pages" do
 
     images = [
-      sony1 = Generate::Image.new(nil, nil, "sony"),
-      sony2 = Generate::Image.new(nil, nil, "sony"),
-      leica1 = Generate::Image.new(nil, nil, "leica"),
+      sony1 = Generate::Image.new(nil, nil, "sony", "dx1"),
+      sony2 = Generate::Image.new(nil, nil, "sony", "dx1"),
+      leica1 = Generate::Image.new(nil, nil, "leica", "m1"),
+      leica2 = Generate::Image.new(nil, nil, "leica", "m2"),
     ]  
 
     expect(Generate.makes(images)).to eq(
@@ -51,17 +52,19 @@ RSpec.describe Generate, ".makes" do
         {
           path: "sony.html",
           images: [sony1, sony2],
-          navigations: []#[Generate::Navigation.new("dx1", "sony-dx1.html")]
+          navigations: [Generate::Navigation.new("dx1", "sony-dx1.html")]
           },
 
           {
             path: "leica.html",
-            images: [leica1],
-          navigations: []#[Generate::Navigation.new("m1", "leica-m1.html")]
-        }
-
-      ]
-      )
+            images: [leica1, leica2],
+            navigations: [
+              Generate::Navigation.new("m1", "leica-m1.html"),
+              Generate::Navigation.new("m2", "leica-m2.html")
+            ]
+          }
+        ]
+        )
 
   end
 end
