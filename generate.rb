@@ -1,55 +1,47 @@
 
 
-module Generate
-
-  Image = Struct.new :thumb, :full, :make, :model
-  Navigation = Struct.new :title, :path
-
-  #
-  # Images
-  #
-  def Generate.distinct_makes(images) 
+Image = Struct.new :thumb, :full, :make, :model do
+  def self.distinct_makes(images) 
     images.collect(&:make).uniq
   end
 
-  def Generate.images_with_make(images, make)
+  def self.by_make(images, make)
     images.find_all {|image| make == image.make }
   end
+end
 
-  #
-  # Navigations
-  #
-  def Generate.navigate_to_make(make)
-    Navigation.new(make, "#{make}.html")
+Navigation = Struct.new :title, :path do
+  def self.to_index
+    new "index", "index.html"  
   end
 
-  def Generate.navigate_to_model(image)
-    Navigation.new(image.model, "#{image.make}-#{image.model}.html")
+  def self.to_make(make)
+    new make, "#{make}.html"
   end
 
-  #
-  # Pages
-  #
-  def Generate.index(images)
+  def self.to_model(image)
+    new image.model, "#{image.make}-#{image.model}.html"
+  end
+end
+
+module Page
+
+  def self.index(images)
     {
       path: "index.html",
       images: images.take(10),
-      navigations:  distinct_makes(images)
-                    .collect{|make| navigate_to_make(make)}
+      navigations:  Image.distinct_makes(images).collect{|make| Navigation.to_make(make)}
     }
   end
 
-  def Generate.makes(images)
-    distinct_makes(images)
-      .collect do |make| 
-        {
-          path:   "#{make}.html",
-          images: images_with_make(images, make).take(10),
-          navigations: images_with_make(images, make)
-                        .uniq(&:model)
-                        .collect {|image| navigate_to_model(image)}
-        }
-      end
+  def self.makes(images)
+    Image.distinct_makes(images).collect do |make| 
+      {
+        path:   "#{make}.html",
+        images: Image.by_make(images, make).take(10),
+        navigations: Image.by_make(images, make).uniq(&:model).collect {|image| Navigation.to_model(image)}
+      }
+    end
   end
 
 end
