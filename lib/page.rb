@@ -1,4 +1,3 @@
-Image = Struct.new :thumb, :full, :make, :model
 Navigation = Struct.new :title, :path
 
 def nav_to_make(make)
