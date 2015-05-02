@@ -1,6 +1,8 @@
-Image = Struct.new :thumb, :full, :make
+
 
 module Generate
+
+  Image = Struct.new :thumb, :full, :make
 
   def Generate.index(works)
     {

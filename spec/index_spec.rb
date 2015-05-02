@@ -1,17 +1,14 @@
 require "generate"
 
-
-
 RSpec.describe Generate, ".index" do
 
   it "contains at most 10 images" do
 
     def dummy_works(size)
      {
-      images: (1..size).collect {|i| Image.new "t#{i}", "f#{i}", "make-#{i}" },
+      images: (1..size).collect {|i| Generate::Image.new "t#{i}", "f#{i}", "make-#{i}" },
      }
     end
-
 
     expect(Generate.index(dummy_works(0))[:images].count).to eq 0
     expect(Generate.index(dummy_works(9))[:images].count).to eq 9
@@ -23,9 +20,9 @@ RSpec.describe Generate, ".index" do
 
     works = {
       images: [
-        Image.new("", "", "sony"),
-        Image.new("", "", "sony"),
-        Image.new("", "", "leica")
+        Generate::Image.new("", "", "sony"),
+        Generate::Image.new("", "", "sony"),
+        Generate::Image.new("", "", "leica")
       ]
     }
 
