@@ -4,16 +4,16 @@ RSpec.describe Generate, ".index" do
 
   it "contains at most 10 images" do
 
-    def dummy_works(size)
-      (1..size).collect {|i| Generate::Image.new "t#{i}", "f#{i}", "make-#{i}" }
+    def number_of_images_on_index_page_with_x_images(count)
+      images = (1..count).collect {|i| Generate::Image.new "t#{i}", "f#{i}", "make-#{i}" }
+      Generate.index(images)[:images].count
     end
 
-    expect(Generate.index(dummy_works(0))[:images].count).to eq 0
-    expect(Generate.index(dummy_works(9))[:images].count).to eq 9
-    expect(Generate.index(dummy_works(10))[:images].count).to eq 10
-    expect(Generate.index(dummy_works(11))[:images].count).to eq 10
+    expect(number_of_images_on_index_page_with_x_images( 0)).to eq  0
+    expect(number_of_images_on_index_page_with_x_images( 9)).to eq  9
+    expect(number_of_images_on_index_page_with_x_images(10)).to eq 10
+    expect(number_of_images_on_index_page_with_x_images(11)).to eq 10
   end
-
 
   it "transforms images into an intermediate view representation for index pages" do
 
@@ -37,6 +37,19 @@ RSpec.describe Generate, ".index" do
 end
 
 RSpec.describe Generate, ".makes" do
+
+  it "contains at most 10 images" do
+
+    def number_of_images_on_a_makes_page_with_x_works(num)
+      images = (1..num).collect {|i| Generate::Image.new nil, nil, "sony", "x1" }
+      Generate.makes(images)[0][:images].size
+    end
+
+    expect(number_of_images_on_a_makes_page_with_x_works( 9)).to eq  9
+    expect(number_of_images_on_a_makes_page_with_x_works(10)).to eq 10
+    expect(number_of_images_on_a_makes_page_with_x_works(11)).to eq 10
+  end
+
 
   it "transforms images into an intermediate representation for make pages" do
 

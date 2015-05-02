@@ -32,7 +32,7 @@ module Generate
         images_of_this_make = images.find_all {|image| make == image.make }
         {
           path:   "#{make}.html",
-          images: images_of_this_make,
+          images: images_of_this_make.take(10),
           navigations: images_of_this_make
                         .uniq(&:model)
                         .collect {|image| navigate_to_model(image)}
