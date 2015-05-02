@@ -4,11 +4,15 @@ Generates a static web site about your photos, camera makes and models
 
 # Running
 
-	bundle exec ruby generate.rb works.xml output-dir
+	bundle exec ruby generate.rb works.xml template.html output-dir
 
 That produces a static site based on works.xml into output-dir
 
 # How?
+
+
+works.xml ==>> [Parser]  ==>> Page model ==>> [Renderer] ==>> html
+
 
 The works.xml file contains information about a collection of photographic works.
 

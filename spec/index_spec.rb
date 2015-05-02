@@ -1,4 +1,4 @@
-require "generate"
+require "page"
 
 RSpec.describe Page, ".index" do
 
