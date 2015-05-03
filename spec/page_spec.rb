@@ -69,19 +69,53 @@ RSpec.describe Page, '.makes' do
           images:      [sony1, sony2],
           navigations: [Page::INDEX_NAV, Page::Navigation.new('dx1', 'sony-dx1.html')]
         },
-
         {
-          title:        'leica',
-          path:         'leica.html',
-          images:       [leica1, leica2],
+          title:       'leica',
+          path:        'leica.html',
+          images:      [leica1, leica2],
           navigations: [
             Page::INDEX_NAV,
             Page::Navigation.new('m1', 'leica-m1.html'),
             Page::Navigation.new('m2', 'leica-m2.html')
           ]
         }
-      ]
-    )
+      ])
+  end
+end
+
+
+RSpec.describe Page, '.models' do
+  it "generates model page for each model" do
+    images = [
+      sony1 = Parse::Image.new("s1", nil, 'sony', 'dx1'),
+      sony2 = Parse::Image.new("s2", nil, 'sony', 'dx1'),
+      leica1 = Parse::Image.new("l1", nil, 'leica', 'm1'),
+      leica2 = Parse::Image.new("l2", nil, 'leica', 'm2'),
+    ]  
+
+    expect(Page::models(images)).to eq([
+      {
+        title:       "sony dx1", 
+        path:        "sony-dx1.html", 
+        images:      [sony1, sony2], 
+        navigations: [Page::INDEX_NAV, Page::Navigation.new("sony", "sony.html")]
+      }, 
+
+      {
+        title:       "leica m1", 
+        path:        "leica-m1.html", 
+        images:      [leica1],
+        navigations: [Page::INDEX_NAV, Page::Navigation.new("leica", "leica.html")]
+      },
+
+      {
+        title:       "leica m2", 
+        path:        "leica-m2.html", 
+        images:      [leica2],
+        navigations: [Page::INDEX_NAV, Page::Navigation.new("leica", "leica.html")]
+      }
+
+      ])
 
   end
 end

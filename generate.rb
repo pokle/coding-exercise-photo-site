@@ -19,6 +19,7 @@ def generate_site(works_file, output_dir)
 
     render_and_write_out(output_dir, Page::index(images))    
     Page::makes(images).each {|make_page| render_and_write_out(output_dir, make_page)}
+    Page::models(images).each {|model_page| render_and_write_out(output_dir, model_page)}
 end
 
 if ARGV.length == 2

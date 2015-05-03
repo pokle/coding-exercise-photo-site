@@ -43,5 +43,20 @@ module Page
       images.collect(&:make).uniq.collect {|make_name| make(images, make_name)}
     end
 
+    def model(images_of_model, make, model)
+      {
+        title: "#{make} #{model}",
+        path:  "#{make}-#{model}.html",
+        images: images_of_model,
+        navigations: [INDEX_NAV, nav_to_make(make)]
+      }
+    end
+
+    def models(images)
+      images
+      .group_by{|image| {make: image.make, model: image.model}}
+      .collect{|segment, images| model(images, segment[:make], segment[:model])}
+    end
+
   end
 end
