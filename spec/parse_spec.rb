@@ -20,7 +20,9 @@ RSpec.describe "parser" do
           </exif>
         </work>
       </works>
-    })).to eq([Parse::Image.new('http://small', 'http://large', 'the-make', 'the-model')])
+    })).to eq([
+      Parse::Image.new('http://small', 'http://large', 'the-make', 'the-model')
+    ])
   end
 
   it "parses a multiple works into a list" do
