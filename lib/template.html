@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{title}}</title>
+  <style type="text/css">
+    nav {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>{{title}}</h1>
+
+    <nav>
+      {{#navigation}}
+        <a href="{{path}}">{{title}}</a>
+      {{/navigation}}
+    </nav>
+  </header>
+
+  {{#images}}
+    <a href="{{full}}"><img src="{{thumb}}"></a>
+  {{/images}}
+
+</body>
+</html>

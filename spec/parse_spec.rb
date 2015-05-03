@@ -1,6 +1,6 @@
 require "parse"
 
-RSpec.describe "parser" do
+RSpec.describe Parse do
 
   it "parses an empty set of works as an empty list" do
     expect(Parse::works("<somewhere><works/></somewhere>")).to eq([])

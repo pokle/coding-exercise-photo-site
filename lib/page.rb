@@ -20,7 +20,8 @@ module Page
 
     def index(images)
       {
-        path:        "index.html",
+        title:       'index',
+        path:        'index.html',
         images:      images.take(10),
         navigations: images.collect(&:make).uniq.collect{|make| nav_to_make(make)}
       }
@@ -29,6 +30,7 @@ module Page
     def make(images, make)
       images_of_make = images.find_all{|image| image.make == make}
       {
+        title:       make,
         path:        "#{make}.html",
         images:      images_of_make.take(10),
         navigations: images_of_make.uniq(&:model).collect {|image| nav_to_model(image)}
