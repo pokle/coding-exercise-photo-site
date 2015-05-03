@@ -15,8 +15,8 @@ module Page
       Navigation.new make, "#{make}.html"
     end
 
-    def nav_to_model(image)
-      Navigation.new image.model, "#{image.make}-#{image.model}.html"
+    def nav_to_model(make, model)
+      Navigation.new model, "#{make}-#{model}.html"
     end
 
     def index(images)
@@ -28,21 +28,22 @@ module Page
       }
     end
 
-    def make(images, make)
-      images_of_make = images.find_all{|image| image.make == make}
+    def make(make, images_of_make)
       {
         title:       make,
         path:        "#{make}.html",
         images:      images_of_make.take(10),
-        navigations: [INDEX_NAV] + images_of_make.uniq(&:model).collect {|image| nav_to_model(image)}
+        navigations: [INDEX_NAV] + images_of_make.collect(&:model).uniq.collect{|model| nav_to_model(make, model)}
       }
     end
 
     def makes(images)
-      images.collect(&:make).uniq.collect {|make_name| make(images, make_name)}
+      images
+      .group_by(&:make)
+      .collect {|make,images_of_make| make(make, images_of_make)}
     end
 
-    def model(images_of_model, make, model)
+    def model(make, model, images_of_model)
       {
         title: "#{make} #{model}",
         path:  "#{make}-#{model}.html",
@@ -54,7 +55,7 @@ module Page
     def models(images)
       images
       .group_by{|image| {make: image.make, model: image.model}}
-      .collect{|segment, images| model(images, segment[:make], segment[:model])}
+      .collect{|segment, images_of_model| model(segment[:make], segment[:model], images_of_model)}
     end
 
   end
