@@ -13,7 +13,7 @@ Or generate it yourself:
 
 ## Design choices
 
-I hadn't written any Ruby for about a couple of years, and it has moved out of my L1 cache. I've been working a lot in Clojure recently, and you'll have to forgive me for trying to achive a functional style in what I would now consider a classical Object Oriented language with mutability running rife. 
+I hadn't written any Ruby for a couple of years, and it has moved out of my L1 cache. I've been working a lot in Clojure recently, and you'll have to forgive me for trying to achive a functional style in what I would now consider a classical Object Oriented language with mutability running rife. 
 
 So here are some of the choices I made:
 
@@ -85,4 +85,4 @@ generate.rb generates several HTML pages:
 Tests are run at CircleCI. You can run them locally with:
 
 	bundle install
-	bundle rspec
+	bundle exec rspec
