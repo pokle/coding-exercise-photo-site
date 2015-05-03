@@ -13,17 +13,18 @@ def render_and_write_out(output_dir, page)
     puts "Generated #{out_file}"
 end
 
+def generate_site(works_file, output_dir)
+    FileUtils.mkdir_p output_dir
+    images = Parse::works(IO::read(works_file))
 
-if ARGV.length != 2
+    render_and_write_out(output_dir, Page::index(images))    
+    Page::makes(images).each {|make_page| render_and_write_out(output_dir, make_page)}
+end
+
+if ARGV.length == 2
+    generate_site *ARGV
+else
     STDERR.puts "usage: WORKS-FILE OUTPUT-DIR"
     exit 1
 end
 
-(works_file, output_dir) = ARGV
-FileUtils.mkdir_p output_dir
-
-
-
-    
-images = Parse::works(IO::read(works_file))
-render_and_write_out(output_dir, Page::index(images))
