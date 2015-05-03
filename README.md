@@ -4,22 +4,40 @@ Generates a static web site about your photos, camera makes and models
 
 # Running
 
-	bundle exec ruby generate.rb works.xml template.html output-dir
+	bundle exec ruby generate.rb works.xml output-dir
 
 That produces a static site based on works.xml into output-dir
 
-# How?
+# How does it work?
+
+The data flows from left to right in the following sequence:
+
+    works.xml *1 ==>> [Parser *2]  ==>> Page model *3 ==>> [Renderer *4] ==>> html *5
 
 
-works.xml ==>> [Parser]  ==>> Page model ==>> [Renderer] ==>> html
+1. The works.xml file contains information about a collection of photographic works.
 
 
-The works.xml file contains information about a collection of photographic works.
+	    <works>
+	       <work>
+	         <urls>
+	           <url type='small'>http://small-image.jpg</url>
+	           <url type='large'>http://large-image.jpg</url>
+	         </urls>
+	         <exif>
+	           <make>Camera Make</make>
+	           <model>Camera Model</model>
+	         </exif>
+	       </work>
+	       …
+	     </works>
 
-    <works>
-	  <work/>...
-	</works>
+2. lib/parse.rb extracts just enough from that XML file as a list of images
+3. lib/page.rb transforms the images into a representation of pages grouped by makes and models.
+4. The renderer renders HTML documents by tying the page model with a mustache template (lib/template.html)
+5. Finally, generate.rb writes out the HTML to files
 
+## Spec
 generate.rb generates several HTML pages:
 
 - index.html 
