@@ -2,16 +2,30 @@
 
 Generates a static web site about your photos, camera makes and models
 
-# Running
+## Running it
+
+Drive a sample site here: [http://pokle.github.io/coding-exercise-photo-site/](http://pokle.github.io/coding-exercise-photo-site/)
+
+Or generate it yourself:
 
     bundle install --path vendor/bundle
 	./generate.rb works.xml output-dir
 
-That produces a static site based on works.xml into output-dir.
+## Design choices
 
-# Don't want to run it?
+I hadn't written any Ruby for about a couple of years, and it has moved out of my L1 cache. I've been working a lot in Clojure recently, and you'll have to forgive me for trying to achive a functional style in what I would now consider a classical Object Oriented language with mutability running rife. 
 
-Drive a sample site here: [http://pokle.github.io/coding-exercise-photo-site/](http://pokle.github.io/coding-exercise-photo-site/)
+So here are some of the choices I made:
+
+- Write pure functions where possible
+  - Don't hold on to state in Objects
+  - Take all your inputs as a parameter
+  - Don't modify anything you're sent - it isn't yours  
+  - Return your outputs
+- This is a classic data transformation excercise with multiple stages feeding intermediate results to the next
+  - Don't let downstream concerns flow upstream
+  - Where possibly, use maps and lists - universal data types that can be consumed and transformed using universal functions that work on data (collect, find_all, group, uniq, ...)
+
 
 # How does it work?
 
