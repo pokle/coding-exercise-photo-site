@@ -9,6 +9,10 @@ Generates a static web site about your photos, camera makes and models
 
 That produces a static site based on works.xml into output-dir.
 
+# Don't want to run it?
+
+Drive a sample site here: [http://pokle.github.io/coding-exercise-photo-site/](http://pokle.github.io/coding-exercise-photo-site/)
+
 # How does it work?
 
 The data flows from left to right in the following sequence:
