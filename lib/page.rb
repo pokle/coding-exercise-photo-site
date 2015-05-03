@@ -1,4 +1,3 @@
-
 #
 # Helps you go from a list of images to a page model that's suitable for templating
 #

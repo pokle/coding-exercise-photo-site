@@ -55,4 +55,8 @@ RSpec.describe Parse do
     ])
   end
 
+  it "parses missing exif information with blanks" do
+    expect(Parse::works(%q{<works><work/></works>})).to eq([Parse::Image.new('', '', '', '')])    
+  end
+
 end
