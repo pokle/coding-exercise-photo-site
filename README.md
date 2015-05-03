@@ -29,13 +29,25 @@ So here are some of the choices I made:
 
 # How does it work?
 
-The data flows from left to right in the following sequence:
+	                       +-------------+                                     
+	                       | generate.rb |                                     
+	                       +-------------+                                     
+	                           controls                                        
+	  work .xml                  the                                  HTML     
+	      +                    data flow                                       
+	      |                                                             ^      
+	      |                                                             |      
+	      |                                                             |      
+	+-----v--------+          +------------+                    +-------+-----+
+	|              | [Image…] |lib/page.rb | {images: […],      |             |
+	| lib/parse.rb |          |            |  navigations: […]…}|lib/render.rb|
+	|              |          |makes a page|                    |             |
+	|              +---------->    model   +-------------------->             |
+	+--------------+          +------------+                    +-------------+
+	
 
-    works.xml *1 ==>> [Parser *2]  ==>> Page model *3 ==>> [Renderer *4] ==>> html *5
-
-
-1. The works.xml file contains information about a collection of photographic works.
-
+## Spec
+works.xml has information about images:
 
 	    <works>
 	       <work>
@@ -51,12 +63,7 @@ The data flows from left to right in the following sequence:
 	       …
 	     </works>
 
-2. lib/parse.rb extracts just enough from that XML file as a list of images
-3. lib/page.rb transforms the images into a representation of pages grouped by makes and models.
-4. The renderer renders HTML documents by tying the page model with a mustache template (lib/template.html)
-5. Finally, generate.rb writes out the HTML to files
 
-## Spec
 generate.rb generates several HTML pages:
 
 - index.html 
