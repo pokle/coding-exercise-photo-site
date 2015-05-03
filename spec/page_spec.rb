@@ -67,7 +67,7 @@ RSpec.describe Page, '.makes' do
           title:       'sony',
           path:        'sony.html',
           images:      [sony1, sony2],
-          navigations: [Page::Navigation.new('dx1', 'sony-dx1.html')]
+          navigations: [Page::INDEX_NAV, Page::Navigation.new('dx1', 'sony-dx1.html')]
         },
 
         {
@@ -75,6 +75,7 @@ RSpec.describe Page, '.makes' do
           path:         'leica.html',
           images:       [leica1, leica2],
           navigations: [
+            Page::INDEX_NAV,
             Page::Navigation.new('m1', 'leica-m1.html'),
             Page::Navigation.new('m2', 'leica-m2.html')
           ]

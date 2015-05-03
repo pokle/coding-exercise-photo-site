@@ -8,6 +8,8 @@ module Page
 
   Navigation = Struct.new :title, :path
 
+  INDEX_NAV = Navigation.new 'index', 'index.html'
+
   class << self
 
     def nav_to_make(make)
@@ -20,8 +22,8 @@ module Page
 
     def index(images)
       {
-        title:       'index',
-        path:        'index.html',
+        title:       INDEX_NAV.title,
+        path:        INDEX_NAV.path,
         images:      images.take(10),
         navigations: images.collect(&:make).uniq.collect{|make| nav_to_make(make)}
       }
@@ -33,7 +35,7 @@ module Page
         title:       make,
         path:        "#{make}.html",
         images:      images_of_make.take(10),
-        navigations: images_of_make.uniq(&:model).collect {|image| nav_to_model(image)}
+        navigations: [INDEX_NAV] + images_of_make.uniq(&:model).collect {|image| nav_to_model(image)}
       }
     end
 
