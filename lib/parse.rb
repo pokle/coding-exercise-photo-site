@@ -1,6 +1,8 @@
 require 'nokogiri'
 
-
+#
+# works.xml  ==>> [Image...]
+#
 module Parse
 
   Image = Struct.new :thumb, :full, :make, :model

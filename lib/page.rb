@@ -1,6 +1,9 @@
 
-# Functions that can transform a parsed set of images to a page model
-# suitable for consumption by an HTML templating engine
+#
+# Helps you go from a list of images to a page model that's suitable for templating
+#
+#  [Image...] ==>> {path: '', images: [Image...], navigations: [Navigation...]}
+#
 module Page
 
   Navigation = Struct.new :title, :path
