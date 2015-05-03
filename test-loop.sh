@@ -10,12 +10,12 @@ say_when_changed() {
 }
 
 run_tests() {
-	bundle exec rspec && say_when_changed "fixed" || say_when_changed "broken"
+	bundle exec rake && say_when_changed "fixed" || say_when_changed "broken"
 	echo -n 'watching changes: '
 }
 
 run_tests
-fswatch --exclude .git --one-per-batch . | while read change; do
+fswatch --exclude .git --exclude build --one-per-batch . | while read change; do
 	echo changed: $change
 	run_tests
 done

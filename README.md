@@ -32,18 +32,18 @@ So here are some of the choices I made:
 	                       +-------------+                                     
 	                       | generate.rb |                                     
 	                       +-------------+                                     
-	                           controls                                        
-	  work .xml                  the                                  HTML     
-	      +                    data flow                                       
-	      |                                                             ^      
-	      |                                                             |      
-	      |                                                             |      
-	+-----v--------+          +------------+                    +-------+-----+
-	|              | [Image…] |lib/page.rb | {images: […],      |             |
-	| lib/parse.rb |          |            |  navigations: […]…}|lib/render.rb|
-	|              |          |makes a page|                    |             |
-	|              +---------->    model   +-------------------->             |
-	+--------------+          +------------+                    +-------------+
+	                           controls                                   
+	  work .xml                  the                             HTML     
+	      +                    data flow                                  
+	      |                                                        ^      
+	      |                                                        |      
+	      |                                                        |      
+	+-----v--------+          +------------+               +-------+-----+
+	|              | [Image…] |lib/page.rb | {images: […], |             |
+	| lib/parse.rb |          |            |  navs: […]…}  |lib/render.rb|
+	|              |          |makes a page|               |             |
+	|              +---------->    model   +--------------->             |
+	+--------------+          +------------+               +-------------+
 	
 
 ## Spec
@@ -82,7 +82,7 @@ generate.rb generates several HTML pages:
 
 [![Circle CI](https://circleci.com/gh/pokle/coding-exercise-photo-site.svg?style=svg)](https://circleci.com/gh/pokle/coding-exercise-photo-site)
 
-Tests are run at CircleCI. You can run them locally with:
+Tests are run at CircleCI.com. You can also run them locally with:
 
 	bundle install
-	bundle exec rspec
+	bundle exec rake
