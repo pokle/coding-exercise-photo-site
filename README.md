@@ -86,3 +86,6 @@ Tests are run at CircleCI.com. You can also run them locally with:
 
 	bundle install
 	bundle exec rake
+
+----
+[My other coding exercises](https://github.com/search?q=user%3Apokle+coding-exercise)
