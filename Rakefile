@@ -1,4 +1,3 @@
-
 require 'rubocop/rake_task'
 require 'rspec/core/rake_task'
 
@@ -9,4 +8,4 @@ task :site do
   system __dir__ + '/generate.rb works.xml build/sample'
 end
 
-task default: [:spec, :rubocop, :site]
+task default: %i[spec rubocop site]

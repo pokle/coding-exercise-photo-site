@@ -72,7 +72,8 @@ RSpec.describe Page, '.makes' do
             Page::Nav.new('m2', 'leica-m2.html')
           ]
         }
-      ])
+      ]
+    )
   end
 end
 
@@ -85,7 +86,7 @@ RSpec.describe Page, '.models' do
       leica2 = Parse::Image.new('l2', nil, 'leica', 'm2')
     ]
 
-    expect(Page.models(images)).to eq([
+    expected = [
       {
         title:  'sony dx1',
         path:   'sony-dx1.html',
@@ -106,7 +107,7 @@ RSpec.describe Page, '.models' do
         images: [leica2],
         navs:   [Page::INDEX_NAV, Page::Nav.new('leica', 'leica.html')]
       }
-
-    ])
+    ]
+    expect(Page.models(images)).to eq(expected)
   end
 end

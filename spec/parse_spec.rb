@@ -20,11 +20,18 @@ RSpec.describe Parse do
         </work>
       </works>
     ")).to eq([
-      Parse::Image.new('http://small', 'http://large', 'the-make', 'the-model')
-    ])
+                Parse::Image.new(
+                  'http://small', 'http://large',
+                  'the-make', 'the-model'
+                )
+              ])
   end
 
   it 'parses a multiple works into a list' do
+    expected = [
+      Parse::Image.new('http://s1', 'http://l1', 'the-make-1', 'the-model-1'),
+      Parse::Image.new('http://s2', 'http://l2', 'the-make-2', 'the-model-2')
+    ]
     expect(Parse.works("
       <works>
         <work>
@@ -48,10 +55,7 @@ RSpec.describe Parse do
           </exif>
         </work>
       </works>
-    ")).to eq([
-      Parse::Image.new('http://s1', 'http://l1', 'the-make-1', 'the-model-1'),
-      Parse::Image.new('http://s2', 'http://l2', 'the-make-2', 'the-model-2')
-    ])
+    ")).to eq(expected)
   end
 
   it 'parses missing exif information with blanks' do
